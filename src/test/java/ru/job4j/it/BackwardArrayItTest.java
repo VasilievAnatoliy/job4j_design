@@ -29,6 +29,17 @@ public class BackwardArrayItTest {
         assertThat(it.next(), is(1));
     }
 
+    @Test
+    public void whenReadSequenceReversed() {
+        BackwardArrayIt it = new BackwardArrayIt(
+                new int[] {4, 3, 2, 1}
+        );
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(4));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void whenNextFromEmpty() {
         BackwardArrayIt it = new BackwardArrayIt(
