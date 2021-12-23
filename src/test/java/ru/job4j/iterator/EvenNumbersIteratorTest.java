@@ -15,7 +15,7 @@ public class EvenNumbersIteratorTest {
 
     @Before
     public void setUp() {
-        it = new EvenNumbersIterator(new int[]{-1, 0, 1, 2, 3, 4, 5, 6, 7});
+        it = new EvenNumbersIterator(new int[]{1, 2, 3, 4, 5, 6, 7});
     }
 
     @Test(expected = NoSuchElementException.class)
