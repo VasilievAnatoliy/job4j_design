@@ -14,12 +14,12 @@ public class BackwardArrayIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return point < data.length;
+        return point >= 0;
     }
 
     @Override
     public Integer next() {
-        if (!hasNext() || point < 0) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         return data[point--];
