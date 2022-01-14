@@ -24,11 +24,10 @@ public class SimpleQueue<T> {
      * и удалят его.
      */
     public T poll() {
-        if (inSize == 0
-                && outSize == 0) {
-            throw new NoSuchElementException();
-        }
         if (outSize == 0) {
+            if (inSize == 0) {
+                throw new NoSuchElementException();
+            }
             while (inSize > 0) {
                 out.push(in.pop());
                 inSize--;
