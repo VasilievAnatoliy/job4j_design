@@ -16,9 +16,11 @@ public class SimpleQueue<T> {
 
     /**
      * Метод poll() - Реализация FIFO
-     * Перемещает все элименты из Stack in в
+     * Если Stack out пустой то
+     * перемещает все элименты из Stack in в
      * Stack out в обратной последовательноси.
-     * @return  Возвращает первое значение из коллекции out
+     *
+     * @return Возвращает первое значение из коллекции out
      * и удалят его.
      */
     public T poll() {
@@ -26,10 +28,12 @@ public class SimpleQueue<T> {
                 && outSize == 0) {
             throw new NoSuchElementException();
         }
-        while (inSize > 0) {
-            out.push(in.pop());
-            inSize--;
-            outSize++;
+        if (outSize == 0) {
+            while (inSize > 0) {
+                out.push(in.pop());
+                inSize--;
+                outSize++;
+            }
         }
         outSize--;
         return out.pop();
@@ -37,16 +41,10 @@ public class SimpleQueue<T> {
 
     /**
      * Метод push(T value) - Помещает значение в конец очереди Stack in.
-     * Если в коллеции Stack out есть элименты то сначала перемещает их
-     * в коллекцию Stack in, а потом добавляет новый элимент.
+     *
      * @param value Значение помещаемое в конец очереди Stack in.
      */
     public void push(T value) {
-        while (outSize > 0) {
-            in.push(out.pop());
-            outSize--;
-            inSize++;
-        }
         in.push(value);
         inSize++;
     }
