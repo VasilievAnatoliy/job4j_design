@@ -24,11 +24,10 @@ public class SimpleQueue<T> {
      * и удалят его.
      */
     public T poll() {
-        if (inSize == 0
-                && outSize == 0) {
-            throw new NoSuchElementException();
-        }
         if (outSize == 0) {
+            if (inSize == 0) {
+                throw new NoSuchElementException();
+            }
             while (inSize > 0) {
                 out.push(in.pop());
                 inSize--;
@@ -39,6 +38,13 @@ public class SimpleQueue<T> {
         return out.pop();
     }
 
+    public boolean outIsEmpty() {
+        return outSize == 0;
+    }
+/*
+Верно, теперь устраним последний недочет - смотрите, вы два раза проверяете одно условие - outSize == 0.
+ Переработайте код, чтобы это условие , как и условие inSize == 0, выполнялось один раз.
+ */
     /**
      * Метод push(T value) - Помещает значение в конец очереди Stack in.
      *
