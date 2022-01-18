@@ -28,7 +28,6 @@ public class User {
             int hash = Objects.hash(h);
             int i = hash & (16 - 1);
             System.out.println("index = " + i);
-            System.out.println(entry.getKey());
         }
     }
 }
