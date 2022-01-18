@@ -13,6 +13,20 @@ public class User {
         this.birthday = birthday;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday=" + birthday.getTime()
+                + '}';
+    }
+
     public static void main(String[] args) {
         User user1 = new User("Vova", 2,
                 new GregorianCalendar(2000, Calendar.JANUARY, 1));
@@ -27,6 +41,8 @@ public class User {
             int hashCode = entry.getKey().hashCode();
             int hash = Objects.hash(hashCode);
             int index = hash & (16 - 1);
+            System.out.println(entry.getKey());
+            System.out.println("hash = " + Objects.hash(entry.getKey()));
             System.out.println("index = " + index);
         }
     }
