@@ -58,7 +58,7 @@ public class User {
             System.out.println(entry.getKey());
             System.out.println("hash = " + Objects.hash(entry.getKey()));
             System.out.println("index = " + index);
-            //System.out.println(hashCode);
+            System.out.println(hashCode);
         }
     }
 }
