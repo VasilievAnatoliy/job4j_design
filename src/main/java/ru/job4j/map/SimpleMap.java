@@ -80,11 +80,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
+        var rsl = table[index(key)].value;
         if (table[index(key)] == null
                 || !Objects.equals(key, table[index(key)].key)) {
-            return null;
+            rsl = null;
         }
-        return table[index(key)].value;
+        return rsl;
     }
 
     /**
@@ -115,14 +116,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
             @Override
             public boolean hasNext() {
-                boolean rsl = index < table.length;
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (rsl && table[index] == null) {
+                while (index < table.length && table[index] == null) {
                     index++;
                 }
-                return rsl;
+                return index < table.length;
             }
 
             @Override
