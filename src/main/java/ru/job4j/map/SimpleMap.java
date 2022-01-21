@@ -80,12 +80,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
-        var rsl = table[index(key)].value;
-        if (table[index(key)] == null
-                || !Objects.equals(key, table[index(key)].key)) {
-            rsl = null;
-        }
-        return rsl;
+        return table[index(key)] == null || !Objects.equals(key, table[index(key)].key)
+                ? null : table[index(key)].value;
     }
 
     /**
