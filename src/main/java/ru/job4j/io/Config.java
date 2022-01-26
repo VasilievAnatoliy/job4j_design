@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,12 +22,12 @@ public class Config {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String line;
             while ((line = read.readLine()) != null) {
-                String[] str = line.split("=");
-                if (str.length < 2 && line.contains("=")) {
-                    throw new IllegalArgumentException();
-                }
-                if (str.length == 2) {
-                    values.put(str[0], str[1]);
+                if (validation(line)) {
+                    String[] str = line.split("=");
+                    if (str.length == 2
+                            && str[0] != null && str[1] != null) {
+                        values.put(str[0], str[1]);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -33,8 +35,16 @@ public class Config {
         }
     }
 
+    public Boolean validation(@NotNull String str) {
+        if (str.contains("=")
+                && str.endsWith("=") || str.startsWith("=")) {
+            throw new IllegalArgumentException();
+        }
+        return str.contains("=");
+    }
+
     public String value(String key) {
-        if (key == null) {
+        if (!values.containsKey(key)) {
             throw new UnsupportedOperationException("Don't impl this method yet!");
         }
         return values.get(key);
