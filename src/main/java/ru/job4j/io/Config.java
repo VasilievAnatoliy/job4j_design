@@ -1,7 +1,5 @@
 package ru.job4j.io;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,7 +33,7 @@ public class Config {
         }
     }
 
-    public Boolean validation(@NotNull String str) {
+    public Boolean validation(String str) {
         if (str.contains("=")
                 && str.endsWith("=") || str.startsWith("=")) {
             throw new IllegalArgumentException();
