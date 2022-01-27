@@ -10,10 +10,10 @@ public class Analizy {
             String line;
             while ((line = read.readLine()) != null) {
                 String[] str = line.split(" ");
-                if (start == null && str[0].equals("400") || str[0].equals("500")) {
+                if (start == null && (str[0].equals("400") || str[0].equals("500"))) {
                     start = str[1];
                 }
-                if (start != null && str[0].equals("200") || str[0].equals("300")) {
+                if (start != null && (str[0].equals("200") || str[0].equals("300"))) {
                     out.printf("%s%n", start + ";" + str[1] + ";");
                     start = null;
                 }
