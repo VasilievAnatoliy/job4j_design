@@ -6,8 +6,7 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class AnalizyTest {
 
@@ -32,9 +31,8 @@ public class AnalizyTest {
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
         }
-        assertThat(rsl.toString(), is("10:57:01;10:59:01;"
-                + "11:01:02;11:02:02;"));
+        assertEquals(rsl.toString(), "10:57:01;10:59:01;"
+                + "11:01:02;11:02:02;");
     }
-
 
 }
