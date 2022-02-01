@@ -22,10 +22,11 @@ public class Config {
             while ((line = read.readLine()) != null) {
                 if (validation(line)) {
                     String[] str = line.split("=");
-                    if (str.length == 2
-                            && str[0] != null && str[1] != null) {
-                        values.put(str[0], str[1]);
+                    if (str.length != 2
+                            || str[0].equals("") || str[1].equals("")) {
+                        throw new IllegalArgumentException();
                     }
+                    values.put(str[0], str[1]);
                 }
             }
         } catch (IOException e) {
@@ -34,8 +35,8 @@ public class Config {
     }
 
     public Boolean validation(String str) {
-        if (str.contains("=")
-                && str.endsWith("=") || str.startsWith("=")) {
+        if ((!str.contains("=") && !str.equals("") && !str.startsWith("#"))
+                || (str.endsWith("=") || str.startsWith("="))) {
             throw new IllegalArgumentException();
         }
         return str.contains("=");

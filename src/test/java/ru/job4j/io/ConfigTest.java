@@ -18,7 +18,7 @@ public class ConfigTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenIllegalArgumentException() {
-        String path = "./data/with_IllegalArgumentException .properties";
+        String path = "./data/with_IllegalArgumentException.properties";
         Config config = new Config(path);
         config.load();
     }
@@ -33,5 +33,26 @@ public class ConfigTest {
         assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
         assertThat(config.value("hibernate.connection.username"), is("postgres"));
         assertThat(config.value("hibernate.connection.password"), is("password"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenIllegalArgumentException1() {
+        String path = "./data/with_IllegalArgumentException=UTF-8.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenIllegalArgumentException2() {
+        String path = "./data/with_IllegalArgumentException-enconding--UTF-8.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenIllegalArgumentException3() {
+        String path = "./data/with_IllegalArgumentException-enconding==UTF-8.properties";
+        Config config = new Config(path);
+        config.load();
     }
 }
