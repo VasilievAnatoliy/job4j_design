@@ -35,18 +35,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                 .filter(x -> x.getValue().size() > 1)
                 .flatMap(x -> x.getValue().stream())
                 .collect(Collectors.toList());
-
-        /*
-       List<Path> paths = new ArrayList<>();
-        for (Map.Entry<FileProperty, List<Path>> entry : hashMap.entrySet()) {
-            if (entry.getValue().size() > 1) {
-                for (Path path : entry.getValue()) {
-                 paths.add(path);
-                }
-            }
-        }
-        return paths;
-        */
     }
 }
 
