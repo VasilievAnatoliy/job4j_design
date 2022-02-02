@@ -21,6 +21,9 @@ public class Search {
             throw new IllegalArgumentException("Need root folder and file extension."
                     + "Usage java -jar dir.jar ROOT_FOLDER FILE_EXTENSION");
         }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("file extension must start with a dot");
+        }
         File file = new File(args[0]);
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Root folder not exist %s", file.getAbsoluteFile()));
