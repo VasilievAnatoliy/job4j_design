@@ -27,7 +27,7 @@ public class ArgsName {
     }
 
     private static String check(String value) {
-        if (!value.contains("=") && !value.startsWith("-=")) {
+        if (!value.contains("=") || value.startsWith("-=")) {
             throw new IllegalArgumentException("invalid argument");
         }
         return value.startsWith("-") ? value.substring(1) : value;
