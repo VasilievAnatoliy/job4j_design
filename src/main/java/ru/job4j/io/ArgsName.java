@@ -27,10 +27,10 @@ public class ArgsName {
     }
 
     private static String check(String value) {
-        if (!value.contains("=")) {
-            throw new IllegalArgumentException("invalid argument need =");
+        if (!value.contains("=") && !value.startsWith("-=")) {
+            throw new IllegalArgumentException("invalid argument");
         }
-        return (value.startsWith("-") && !value.startsWith("-=")) ? value.substring(1) : value;
+        return value.startsWith("-") ? value.substring(1) : value;
     }
 
     private static Boolean validation(String[] str) {
