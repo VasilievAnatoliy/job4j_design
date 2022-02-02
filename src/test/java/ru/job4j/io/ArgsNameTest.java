@@ -35,4 +35,10 @@ public class ArgsNameTest {
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
+
+    @Test
+    public void whenKeyDash() {
+        ArgsName jvm = ArgsName.of(new String[] {"-=?Exit="});
+        assertThat(jvm.get("-"), is("?Exit="));
+    }
 }

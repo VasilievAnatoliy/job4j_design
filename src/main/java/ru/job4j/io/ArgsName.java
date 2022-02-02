@@ -8,6 +8,9 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
+        if (!values.containsKey(key)) {
+            throw new IllegalArgumentException("no value");
+        }
         return values.get(key);
     }
 
@@ -23,19 +26,16 @@ public class ArgsName {
         }
     }
 
-    public static String check(String value) {
-        String rsl;
-        if (value.startsWith("-")) {
-            rsl = value.substring(1);
-        } else {
-            rsl = value;
+    private static String check(String value) {
+        if (!value.contains("=")) {
+            throw new IllegalArgumentException("invalid argument need =");
         }
-        return rsl;
+        return (value.startsWith("-") && !value.startsWith("-=")) ? value.substring(1) : value;
     }
 
-    public static Boolean validation(String[] str) {
+    private static Boolean validation(String[] str) {
         if (str.length != 2
-                || str[0].equals("") || str[1].equals("")) {
+                || "".equals(str[0]) || "".equals(str[1])) {
             throw new IllegalArgumentException("invalid arguments");
         }
         return true;
