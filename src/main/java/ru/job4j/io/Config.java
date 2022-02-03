@@ -23,8 +23,8 @@ public class Config {
                 if (validation(line)) {
                     String[] str = line.split("=");
                     if (str.length != 2
-                            || str[0].equals("") || str[1].equals("")) {
-                        throw new IllegalArgumentException();
+                            || "".equals(str[0]) || "".equals(str[1])) {
+                        throw new IllegalArgumentException("pattern invalid (key=value)");
                     }
                     values.put(str[0], str[1]);
                 }
@@ -35,9 +35,9 @@ public class Config {
     }
 
     public Boolean validation(String str) {
-        if ((!str.contains("=") && !str.equals("") && !str.startsWith("#"))
+        if ((!str.contains("=") && !"".equals(str) && !str.startsWith("#"))
                 || (str.endsWith("=") || str.startsWith("="))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("pattern invalid (key=value)");
         }
         return str.contains("=");
     }
