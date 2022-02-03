@@ -33,6 +33,24 @@ public class Zip {
         }
     }
 
+    private static ArgsName check(String[] args) {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("need 3 argument");
+        }
+        ArgsName argument = ArgsName.of(args);
+        if (".".startsWith(argument.get("e"))) {
+            throw new IllegalArgumentException("file extension must start with a dot");
+        }
+        File file = new File(argument.get("d"));
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("file not exist %s", file.getAbsoluteFile()));
+        }
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("not directory %s", file.getAbsoluteFile()));
+        }
+        return argument;
+    }
+
     /**
      * -d - directory - которую мы хотим архивировать.
      * -e - exclude - исключить файлы с расширением class.
@@ -41,8 +59,8 @@ public class Zip {
      * java -jar pack.jar -d=c:\project\job4j\ -e=class -o=project.zip
      */
     public static void main(String[] args) throws IOException {
-        ArgsName arguments = ArgsName.of(args);
-         List<File> files = new ArrayList<>();
+        ArgsName arguments = check(args);
+        List<File> files = new ArrayList<>();
         for (Path path : Search.search(
                 Path.of(arguments.get("d")),
                 x -> !x.toFile().getName().endsWith(arguments.get("e")))) {
@@ -52,3 +70,4 @@ public class Zip {
 
     }
 }
+
