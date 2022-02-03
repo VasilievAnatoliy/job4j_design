@@ -67,7 +67,6 @@ public class Zip {
             files.add(path.toFile());
         }
         packFiles(files, new File(arguments.get("o")));
-
     }
 }
 
