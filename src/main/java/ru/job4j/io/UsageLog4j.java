@@ -18,6 +18,5 @@ public class UsageLog4j {
         double d = 3453245.32;
         LOG.debug("User info name : {}, age : {}, c : {}, b : {}, s : {}, l : {}, f : {}, d : {}",
                 name, age, c, b, s, l, f, d);
-
     }
 }
