@@ -39,5 +39,20 @@ public class Car {
         System.out.println(gson.toJson(car));
         Car fromJson = gson.fromJson(gson.toJson(car), Car.class);
         System.out.println(fromJson);
+
+        final String carJson =
+                "{"
+                        + "\"color\":green,"
+                        + "\"suv\":true,"
+                        + "\"doors\":3,"
+                        + "\"model\":"
+                        + "{"
+                        + "\"model\":\"Niva\""
+                        + "},"
+                        + "\"options\":"
+                        + "[\"ABS\",\"winter package\",\"heated seats\"]"
+                        + "}";
+        final Car carMod = gson.fromJson(carJson, Car.class);
+        System.out.println(carMod);
     }
 }
