@@ -1,7 +1,6 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
-
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,19 +19,21 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() throws ClassNotFoundException, SQLException {
-        Config config = new Config("./src/main/resources/app.properties");
-        config.load();
-        Class.forName(config.value("driver"));
-        String url = config.value("url");
-        String login = config.value("login");
-        String password = config.value("password");
+        Class.forName(properties.getProperty("driver"));
+        String url = properties.getProperty("url");
+        String login = properties.getProperty("login");
+        String password = properties.getProperty("password");
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    private void statement(String str, String tableName) throws Exception {
+    private void statement(String str, String tableName) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             statement.execute(str);
-            System.out.println(getTableScheme(connection, tableName));
+            try {
+                System.out.println(getTableScheme(connection, tableName));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -88,11 +89,14 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        TableEditor table = new TableEditor(properties);
-        table.createTable("demo_table");
-        table.addColumn("demo_table", "age", "int");
-        table.renameColumn("demo_table", "age", "number");
-        table.dropColumn("demo_table", "number");
-        table.dropTable("demo_table");
+        try (FileInputStream in = new FileInputStream("./src/main/resources/app.properties")) {
+            properties.load(in);
+            TableEditor table = new TableEditor(properties);
+            table.createTable("demo_table");
+            table.addColumn("demo_table", "age", "int");
+            table.renameColumn("demo_table", "age", "number");
+            table.dropColumn("demo_table", "number");
+            table.dropTable("demo_table");
+        }
     }
 }
