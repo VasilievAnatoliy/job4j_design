@@ -13,7 +13,7 @@ public class TableEditor implements AutoCloseable {
     private Connection connection;
     private Properties properties;
 
-    public TableEditor(Properties properties) throws ClassNotFoundException, SQLException {
+    public TableEditor(Properties properties) throws SQLException, ClassNotFoundException {
         this.properties = properties;
         initConnection();
     }
@@ -91,7 +91,8 @@ public class TableEditor implements AutoCloseable {
         Properties properties = new Properties();
         try (FileInputStream in = new FileInputStream("./src/main/resources/app.properties")) {
             properties.load(in);
-            TableEditor table = new TableEditor(properties);
+        }
+        try (TableEditor table = new TableEditor(properties)) {
             table.createTable("demo_table");
             table.addColumn("demo_table", "age", "int");
             table.renameColumn("demo_table", "age", "number");
