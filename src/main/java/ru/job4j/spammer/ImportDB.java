@@ -23,11 +23,11 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(s -> {
                 String[] str = s.split(";");
-                if (str.length == 2 || !str[0].isEmpty() || !str[1].isEmpty()) {
+                if (str.length == 2 || (!str[0].isEmpty() && !str[1].isEmpty())) {
                     users.add(new User(str[0], str[1]));
                 }
             });
-        } 
+        }
         return users;
     }
 
