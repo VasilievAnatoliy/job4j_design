@@ -1,6 +1,6 @@
 package ru.job4j.tdd;
 
-import org.checkerframework.checker.units.qual.C;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,6 +13,7 @@ import static org.junit.Assert.assertThat;
 
 public class CinemaTest {
 
+    @Ignore
     @Test
     public void whenBuy() {
         Account account = new AccountCinema();
@@ -23,6 +24,7 @@ public class CinemaTest {
         assertThat(ticket, is(new Ticket3D()));
     }
 
+    @Ignore
     @Test
     public void whenBuySameTicket() {
         Account account = new AccountCinema();
@@ -35,6 +37,7 @@ public class CinemaTest {
         assertNull(ticket2);
     }
 
+    @Ignore
     @Test
     public void whenAdd() {
         Cinema cinema = new Cinema3D();
@@ -44,6 +47,7 @@ public class CinemaTest {
         assertThat(session, is(sessions.get(0)));
     }
 
+    @Ignore
     @Test
     public void whenFind() {
         Cinema cinema = new Cinema3D();
