@@ -3,6 +3,7 @@ package ru.job4j.ood.srp;
 import java.util.function.Predicate;
 
 public class AccountingReport implements Report {
+    public static final double DOLLAR = 100;
     private Store store;
 
     public AccountingReport(Store store) {
@@ -18,7 +19,7 @@ public class AccountingReport implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() / 100).append("$").append(";")
+                    .append(employee.getSalary() / DOLLAR).append("$").append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();

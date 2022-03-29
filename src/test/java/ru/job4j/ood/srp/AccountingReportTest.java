@@ -21,7 +21,7 @@ public class AccountingReportTest {
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
-                .append(1000.0).append("$").append(";")
+                .append(worker.getSalary() / AccountingReport.DOLLAR).append("$").append(";")
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
